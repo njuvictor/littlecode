@@ -13,6 +13,7 @@ public:
         }
         for(int len = 1; len + begin <= s.size(); ++len){
             string t = s.substr(begin, len);
+            // Here, isPalindrome(t) can not use isPalindrome(s.substr(begin, len)) instead;
             if(isPalindrome(t)) {
                 res.push_back(s.substr(begin, len));
                 helper(s, begin + len);
