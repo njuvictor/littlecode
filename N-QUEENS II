@@ -26,3 +26,5 @@ public:
         }
     }
 };
+
+// in order to save memory, you can declare a private variable to record counts.
