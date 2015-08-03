@@ -3,7 +3,7 @@ public:
     int totalNQueens(int n) {
         if(n == 0) return 0;
         vector<int> res;
-        vector<bool> b1(2 * n - 1, 0);
+        vector<bool> b1(2 * n - 1, 0); // the idea is fascinating
         vector<bool> b2(2 * n - 1, 0);
         vector<bool> c(n, 0);
         helper(n, res, b1, b2, c, 0);
