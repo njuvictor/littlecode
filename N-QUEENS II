@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int totalNQueens(int n) {
+        if(n == 0) return 0;
+        vector<int> res;
+        vector<bool> b1(2 * n - 1, 0);
+        vector<bool> b2(2 * n - 1, 0);
+        vector<bool> c(n, 0);
+        helper(n, res, b1, b2, c, 0);
+        return res.size();
+    }
+    void helper(int n, vector<int>& res, vector<bool>& b1, vector<bool>& b2, vector<bool>& c, int col){
+        if(col == n){
+            res.push_back(1);
+            return;
+        }
+        for(int row = 0; row < n; ++row){
+            if(c[row] || b1[col - row + n - 1] || b2[col + row]) continue;
+            c[row] = 1;
+            b1[col - row + n - 1] = 1;
+            b2[col + row] = 1;
+            helper(n, res, b1, b2, c, col + 1);
+            c[row] = 0;
+            b1[col - row + n - 1] = 0;
+            b2[col + row] = 0;
+        }
+    }
+};
