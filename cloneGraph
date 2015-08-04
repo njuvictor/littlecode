@@ -1,0 +1,15 @@
+class Solution {
+public:
+    unordered_map<UndirectedGraphNode*, UndirectedGraphNode*> myMap;
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        if(!node) return nullptr;
+        if(myMap.find(node) == myMap.end()) {
+             UndirectedGraphNode *newNode = new UndirectedGraphNode(node->label);
+             myMap[node] = newNode;
+             for(auto it : node->neighbors){
+                 newNode->neighbors.push_back(cloneGraph(it));
+             }
+        }
+        return myMap[node];
+    }
+};
