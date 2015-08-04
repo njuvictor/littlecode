@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+        vector<vector<int>> matrix(numCourses);
+        for(int i = 0; i < prerequisites.size(); ++i)
+            matrix[prerequisites[i].first].push_back(prerequisites[i].second);
+        bool flag[numCourses] = {};
+        for(int i = 0; i < numCourses; ++i){
+            if(isCycle(matrix, i, flag)) return false;
+        }
+        return true;
+    }
+    bool isCycle(vector<vector<int>>& matrix, int i, bool flag[]){
+        if(matrix[i].size() == 0) return false;
+        if(flag[i] == true) return true;
+        if(flag[i] == false){
+            for(int k = 0; k < matrix[i].size(); ++k){
+                flag[i] = true;
+                if(isCycle(matrix, matrix[i][k], flag)) 
+                    return true;
+                flag[i] = false;
+            }
+        }
+    }
+};
