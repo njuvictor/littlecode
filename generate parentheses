@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<string> result;
+    string res;
+    vector<string> generateParenthesis(int n) {
+        helper(n, 0);//helper(left, left - right);
+        return result;
+    }
+    
+    void helper(int left, int LMoreThanR){
+        if(left == 0 && LMoreThanR == 0) {
+            result.push_back(res);
+            return;
+        }
+        if(left > 0){
+            res.push_back('(');
+            helper(left - 1, LMoreThanR + 1);
+            res.pop_back();
+           
+        }
+        
+        if(LMoreThanR > 0){
+            res.push_back(')');
+            helper(left, LMoreThanR - 1);
+            res.pop_back();
+        }   
+    }
+};
