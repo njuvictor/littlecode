@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> res;
+    vector<vector<int>> combine(int n, int k) {
+        helper(n, k, 0, 0);
+        return result;
+    }
+    
+    void helper(int n, int k, int i, int count) {
+        if(count == k) {
+            result.push_back(res);
+            return;
+        }
+        for(int j = i; j < n; ++j){
+            res.push_back(j + 1);
+            helper(n, k, j + 1, count + 1);
+            res.pop_back();
+        }
+    }
+};
