@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> result;
+    int maxDepth = -1;
+    vector<int> rightSideView(TreeNode* root) {
+        helper(root, 0);
+        return result;
+    }
+    
+    void helper(TreeNode* root, int depth){
+        if(!root) return;
+        if(maxDepth < depth){
+            maxDepth = depth;
+            result.push_back(root->val);
+        }
+            helper(root->right, depth + 1);
+            helper(root->left, depth + 1);
+    }
+};
