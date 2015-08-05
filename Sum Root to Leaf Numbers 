@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int sum = 0;
+    int tmp = 0;
+    int sumNumbers(TreeNode* root) {
+        helper(root);
+        return sum;
+    }
+    void helper(TreeNode* root) {
+        if(!root) return;
+        if(!root->left && !root->right){
+            int t = tmp;
+            tmp = 10 * tmp + root->val;
+            sum += tmp;
+            tmp = t;
+        }
+        int s = tmp;
+        tmp  = 10 * tmp + root->val;
+        helper(root->left);
+        helper(root->right);
+        tmp = s;
+    }
+};
