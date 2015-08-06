@@ -1,0 +1,16 @@
+class Solution {
+public:
+    double myPow(double x, int n) {
+        long nn = labs(n);
+        double a = helper(x, nn);
+        return n > 0 ? a : 1 / a;
+    }
+    
+    double helper(double x, long nn) {
+        if(nn == 0) return 1;
+        if(nn == 1) return x;
+        double h1 = helper(x, nn >> 1);
+        double h2 = helper(x, nn % 2);
+        return h1 * h1 * h2;
+        }
+};
