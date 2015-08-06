@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        vector<int> res;
+        if(!root) return result;
+        vector<TreeNode*> parrent;
+        vector<TreeNode*> current;
+        parrent.push_back(root);
+        result.push_back({root->val});
+        int level = 1;
+        while(!parrent.empty()){
+            for(int i = 0; i < parrent.size(); ++i){
+                if(parrent[i]->left) current.push_back(parrent[i]->left);
+                if(parrent[i]->right) current.push_back(parrent[i]->right);
+            }
+            parrent = current;
+            if(level % 2) reverse(current.begin(), current.end());
+            for(int j = 0; j < current.size(); ++j){
+                res.push_back(current[j]->val);
+            }
+            if(!res.empty())
+                result.push_back(res);
+            res.clear();
+            current.clear();
+            ++level;
+        }
+        return result;
+    }
+};
