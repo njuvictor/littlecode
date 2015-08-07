@@ -1,0 +1,38 @@
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode* result = new ListNode(0);
+        ListNode* current = result;
+        if(!head || !head->next || k == 1) return head;
+        int len = 0;
+        ListNode* cur = head;
+        while(cur){
+            ++len;
+            cur = cur->next;
+        }
+        int group = len / k;
+        if(group == 0) return head;
+        cur = head;
+        for(int i = 1; i <= group; ++i){
+            current->next = reverse(cur, k);
+            current = cur;
+            cur = cur->next;
+        }
+        return result->next;
+    }
+    ListNode* reverse(ListNode* head, int k){
+        ListNode* begin = head;
+        ListNode* end = head;
+        ListNode* cur = head->next;
+        int count = 1;
+        while(count < k){
+            ListNode* node = cur->next;
+            cur->next = begin;
+            end->next = node;
+            begin = cur;
+            cur = node;
+            ++count;
+        }
+        return begin;
+    }
+};
