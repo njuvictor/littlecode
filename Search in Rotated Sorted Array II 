@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        if(nums.empty()) return false;
+        int begin = 0;
+        int end = nums.size() - 1;
+        while(begin + 1 < end){
+            int mid = begin + (end - begin) / 2;
+            if(nums[mid] == target) return true;
+            if(nums[mid] < nums[begin]) {
+                if(target >= nums[mid] && target <= nums[end]) begin = mid;
+                else end = mid;
+            }
+            else if(nums[mid] > nums[begin]){
+                if(target >= nums[begin] && target <= nums[mid]) end = mid;
+                else begin = mid;
+            }
+            else ++begin;
+        }
+        return nums[begin] == target? true: nums[end] == target? true:false;
+    }
+};
