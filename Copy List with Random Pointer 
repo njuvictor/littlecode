@@ -1,0 +1,14 @@
+class Solution {
+public:
+    unordered_map<RandomListNode*, RandomListNode*> myMap;
+    RandomListNode *copyRandomList(RandomListNode *head) {
+        if(!head) return nullptr;
+        if(myMap.find(head) == myMap.end()){
+            RandomListNode* node = new RandomListNode(head->label);
+            myMap[head] = node;
+            node->next = copyRandomList(head->next);
+            node->random = copyRandomList(head->random);
+        }
+        return myMap[head];
+    }
+};
