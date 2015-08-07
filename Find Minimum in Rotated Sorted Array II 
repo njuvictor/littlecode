@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        if(nums.empty()) return -1;
+        if(nums.size() == 1) return nums[0];
+        int begin = 0;
+        int end = nums.size() - 1;
+        int minele = INT_MAX;
+        while(begin + 1 < end){
+            int mid = begin + (end - begin) / 2;
+            if(nums[begin] < nums[mid]) {
+                minele = min(minele, nums[begin]);
+                begin = mid + 1;
+            }
+            else if(nums[begin] > nums[mid]){
+                end = mid;
+            }
+            else ++begin;
+        }
+        return min(minele, min(nums[begin], nums[end]));
+    }
+};
