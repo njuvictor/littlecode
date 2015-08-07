@@ -1,0 +1,34 @@
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if(!head) return;
+        if(!head->next) return;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        ListNode* head2 = slow->next;
+        slow->next = nullptr;
+        ListNode* begin = head2;
+        ListNode* end = head2;
+        ListNode* curr = head2->next;
+        while(curr) {
+            ListNode* tmp = curr->next;
+            curr->next = begin;
+            end->next = tmp;
+            begin = curr;
+            curr = tmp;
+        }
+        ListNode* current = head;
+        while(current && begin){
+            ListNode* node1 = current->next;
+            ListNode* node2 = begin->next;
+            current->next = begin;
+            begin->next = node1;
+            current = node1;
+            begin = node2;
+        }
+    }
+};
