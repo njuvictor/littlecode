@@ -1,0 +1,30 @@
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int m, int n) {
+        int len = 1;
+        ListNode* result = new ListNode(0);
+        ListNode* cur = result;
+        result->next = head;
+        while(len < m){
+            ++len;
+            cur = cur->next;
+        }
+        cur->next = reverse(cur->next, n - m + 1);
+        return result->next;
+    }
+    ListNode* reverse(ListNode* head, int i){
+        int num = 1;
+        ListNode* begin = head;
+        ListNode* end = head;
+        ListNode* cur = head->next;
+        while(num < i){
+            ListNode* tmp = cur->next;
+            cur->next = begin;
+            end->next = tmp;
+            begin = cur;
+            cur = tmp;
+            ++num;
+        }
+        return begin;
+    }
+};
