@@ -1,0 +1,32 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        map<char, int> myMap1, myMap2;
+        int count = 0;
+        for(int i = 0; i < t.size(); ++i) ++myMap2[t[i]];
+        int j = 0;
+        int len = INT_MAX;
+        string result = "";
+        for(int i = 0; i < s.size(); ++i){
+            if(myMap2.find(s[i]) != myMap2.end()) {
+                if(myMap1[s[i]] < myMap2[s[i]]) ++count;
+                ++myMap1[s[i]];
+            }
+            if(count == t.size()){
+                while(j <= i){
+                    if(myMap1.find(s[j]) == myMap1.end()) ++j;
+                    else if(myMap1[s[j]] > myMap2[s[j]])  {
+                        --myMap1[s[j]];
+                        ++j;
+                    }
+                    else break;
+                }
+                if(i - j + 1 < len){
+                    len = i - j + 1;
+                    result = s.substr(j, len);
+                }
+            }
+        }
+        return result;
+    }
+};
