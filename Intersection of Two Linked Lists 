@@ -1,0 +1,16 @@
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int len = 0;
+        for(ListNode* A = headA; A; A = A->next) ++len;
+        for(ListNode* B = headB; B; B = B->next) --len;
+        if(len < 0) swap(headA, headB);
+        for(int i = 0; i < abs(len); ++i) headA = headA->next;
+        while(headA){
+            if(headA == headB) return headA;
+            headA = headA->next;
+            headB = headB->next;
+        }
+        return nullptr;
+    }
+};
